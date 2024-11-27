@@ -1,23 +1,13 @@
 package main
 
 import (
-	"html/template"
+	"github.com/ABHIJEET-MUNESHWAR/URL-Shortener-App/internal/controllers"
 	"log"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", ShowHomePage)
+	http.HandleFunc("/", controllers.ShowIndex)
+	http.HandleFunc("/shorten", controllers.Shorten)
 	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-func ShowHomePage(w http.ResponseWriter, r *http.Request) {
-	template, error := template.ParseFiles("internal/views/index.html")
-	if error != nil {
-		http.Error(w, error.Error(), http.StatusInternalServerError)
-		return
-	}
-	if error = template.Execute(w, nil); error != nil {
-		http.Error(w, error.Error(), http.StatusInternalServerError)
-		return
-	}
 }
