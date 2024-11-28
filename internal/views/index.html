@@ -21,6 +21,12 @@
                     });
 
                     resultDiv.innerHTML = await response.text();
+
+                    // Manually execute script
+                    const script = resultDiv.querySelector('script');
+                    if (script) {
+                        eval(script.innerText);
+                    }
                 });
             }
         });
